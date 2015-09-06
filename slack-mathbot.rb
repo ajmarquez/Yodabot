@@ -1,0 +1,35 @@
+require 'slack-ruby-bot'
+require 'slack-mathbot/commands/calculate'
+
+require 'slack-mathbot/app'
+
+require 'slack-ruby-client'
+
+
+
+Slack.configure do |config|
+  config.token = ENV['SLACK_API_TOKEN']
+  fail 'Missing ENV[SLACK_API_TOKEN]!' unless config.token
+end
+
+client = Slack::RealTime::Client.new
+
+client.on :hello do
+  puts "Successfully connected, welcome '#{client.self['name']}' to the '#{client.team['name']}' team at https://#{client.team['domain']}.slack.com."
+end
+
+client.on :message do |data|
+  puts data
+
+  client.typing channel: data['channel']
+
+  case data['text']
+  when 'bot hi' then
+    client.message channel: data['channel'], text: "Hi <@#{data['user']}>, say hello to Mariana for me!"
+  when 'mariana says hi' then
+    client.message channel: data['channel'], text: "Say Hi, and tell her to stop playing games!"
+  end
+end
+
+
+client.start!
