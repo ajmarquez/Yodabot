@@ -1,11 +1,11 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
-require 'slack-mathbot'
+require 'yodabot'
 require 'web'
 
 Thread.new do
   begin
-    SlackMathbot::App.instance.run
+    Yodabot::App.instance.run
   rescue Exception => e
     STDERR.puts "ERROR: #{e}"
     STDERR.puts e.backtrace
@@ -13,4 +13,4 @@ Thread.new do
   end
 end
 
-run SlackMathbot::Web
+run Yodabot::Web
