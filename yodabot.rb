@@ -49,10 +49,10 @@ client.on :message do |data|
 
 
   case data['text']
-  when 'yodabot hello', 'yodabot hi' then
+  when 'hello', 'yodabot hi' then
     client.message channel: data['channel'], text: "Hi <@#{data['user']}>. Code you must!"
-  when 'mariana says hi' then
-    client.message channel: data['channel'], text: "Say Hi, and tell her to stop playing games!"
+  when 'talk' then
+    client.message channel: data['channel'], text: "PATIENCE YOU MUST HAVE my young padawan. Reactions cath you must!"
   end
 
 
