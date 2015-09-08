@@ -41,8 +41,28 @@ client.on :message do |data|
   #
   #
 
-  puts client.web_client.reactions_list user: data['user']
+  reactionData = client.web_client.reactions_list user: data['user']
 
+  c=0
+
+  reactionData['items'].each { |x|
+    if x['type']=='message'
+      c+=1
+      puts "One Message"
+
+      x['message']['reactions'].each {|y|
+
+        puts y['name']
+      }
+      
+    end
+
+  }
+
+
+
+
+  #puts "**** TEST  '#{reactionData['items']}' "
   client.typing channel: data['channel']
 
 
